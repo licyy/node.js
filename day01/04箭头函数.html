@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="按钮" id="btn1">
+    <input type="button" value="按钮" id="btn2">
+    <input type="button" value="按钮" id="btn3">
+    <script>
+        document.getElementById("btn1").onclick = function () {
+            //this指向的是事件源btn1
+            this.style.backgroundColor = "red"
+        }
+        document.getElementById("btn2").onclick = function () {
+            setTimeout(function () {
+                //setTimeout里面的this指向widow
+                console.log(this);
+                this.style.backgroundColor = "red"
+            }, 1000)
+        }
+        document.getElementById("btn3").onclick = function () {
+            setTimeout(() => {
+                //箭头函数的this指向函数外面的this:btn3
+                console.log(this);
+                this.style.backgroundColor = "red"
+            }, 1000)
+        }
+    </script>
+</body>
+
+</html>
