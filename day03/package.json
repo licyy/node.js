@@ -1,0 +1,17 @@
+{
+  "name": "day03",
+  "version": "1.0.0",
+  "main": "testcalc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {},
+  "description": ""
+}

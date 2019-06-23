@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>THIS is 模板渲染的页面</h1>
+    <p>模板.html就是一个模板，实际显示的界面是在nojs.js中指定的页面</p>
+    <p>{{name}}</p>
+    <p>{{age}}</p>
+    <p>
+        {{each hobby}}
+        <span>{{$value}}</span>
+        {{/each}}
+    </p>
+</body>
+
+</html>
