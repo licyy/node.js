@@ -29,6 +29,8 @@ router.post("/updateHero/:id", ctrl.updateHeroById)
 //软删除==将isdel=0修改成isdel=1
 router.get("/delHero/:id", ctrl.delHeroById)
 
+//重新启用==将isdel=1修改成isdel=0
+router.get("/upHero/:id", ctrl.upHeroById)
 
 //暴露路由对象
 module.exports = router

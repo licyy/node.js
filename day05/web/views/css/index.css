@@ -26,3 +26,22 @@ a {
 a:hover {
   color: red;
 }
+td[data-label="handle"] a {
+  display: inline-block;
+  margin: 0 10px;
+}
+td[data-label="handle"] #del {
+  color: red;
+}
+td[data-label="handle"] #up {
+  color: green;
+}
+.mes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: aqua;
+  display: none;
+}

@@ -23,32 +23,47 @@
                 {{/if}}
                 {{$value.id}}
             </td>
-            <td data-label="Age">{{$value.name}}</td>
-            <td data-label="Job">{{$value.gender}}</td>
-            <td data-label="Age">{{$value.ctime}}</td>
-            <td data-label="Job">
+            <td data-label="name">{{$value.name}}</td>
+            <td data-label="gender">{{$value.gender}}</td>
+            <td data-label="ctime">{{$value.ctime}}</td>
+            <td data-label="handle">
                 <a herf="javascript:;" id="edit">编辑<a>
-                <a herf="javascript:;" id="del">删除<a>
+
+                        {{if $value.isdel=="0"}}
+                        <a herf="javascript:;" id="del">删除</a>
+                        {{else if $value.isdel=="1"}}
+                        <a herf="javascript:;" id="up">启用</a>
+                        {{/if}}
             </td>
         </tr>
+        {{/each}}
+    </script>
+
+    <script type="type/template" id="pageTemp">
+        {{each data}}
+        <a class="item">1</a>
+        <a class="item">2</a>
+        <a class="item">3</a>
         {{/each}}
     </script>
 </head>
 
 <body>
+    <div class="mes" id="mes"></div>
     <h1>英雄管理界面</h1>
     <button class="ui primary button" id="addBtn">添加英雄</button>
 
-    <div class="ui tiny modal">
+    <!-- 添加英雄模态框 -->
+    <div class="ui tiny modal addHero">
         <i class="close icon"></i>
         <div class="header">
             添加新英雄
         </div>
         <div class="content">
-            <form class="ui form">
+            <form class="ui form addHero">
                 <div class="field">
                     <label>姓名</label>
-                    <input type="text" name="name" placeholder="新英雄名字" id="name">
+                    <input type="text" name="name" placeholder="新英雄名字" id="addName">
                 </div>
                 <div class="field">
                     <label>性别</label>
@@ -65,14 +80,12 @@
             <div class="ui black deny button" id="cancel">
                 取消
             </div>
-            <div class="ui right button" id="sure">
+            <div class="ui right button" id="addSure">
                 确认
             </div>
         </div>
     </div>
-
-
-
+    <!-- 添加英雄模态框 -->
 
     <table class="ui celled blue striped table">
         <thead>
@@ -90,8 +103,8 @@
         <tfoot>
             <tr>
                 <th colspan="5">
-                    <div class="ui right floated pagination menu">
-                        <a class="icon item">
+                    <div class="ui right floated pagination menu" id="pageBox">
+                        <!-- <a class="icon item">
                             <i class="left chevron icon"></i>
                         </a>
                         <a class="item">1</a>
@@ -100,12 +113,52 @@
                         <a class="item">4</a>
                         <a class="icon item">
                             <i class="right chevron icon"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </th>
             </tr>
         </tfoot>
     </table>
+
+
+    <div class="ui tiny modal editHero">
+        <i class="close icon"></i>
+        <div class="header">
+            修改英雄
+        </div>
+        <div class="content">
+            <form class="ui form editHero">
+                <div class="field">
+                    <label>姓名</label>
+                    <input type="text" name="name" placeholder="新英雄名字" id="editName">
+                </div>
+                <div class="field">
+                    <label>性别</label>
+                    <select class="ui fluid dropdown" name="gender" id="editGender">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+                <div class="field">
+                        <label>状态</label>
+                        <select class="ui fluid dropdown" name="isdel" id="editIsdel">
+                            <option value="1">删除</option>
+                            <option value="0">启用</option>
+                        </select>
+                    </div>
+                <div class="message"></div>
+            </form>
+
+        </div>
+        <div class="actions">
+            <div class="ui black deny button" id="cancel">
+                取消
+            </div>
+            <div class="ui right button" id="editSure">
+                确认
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
