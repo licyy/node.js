@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <style>
+    #form {
+      width: 400px;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input[type='submit'] {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="form">
+    <h1>注册页面</h1>
+    <div class="form-group">
+      <input type="text" name="username" id="username" class="form-control input-lg" placeholder="用户名" required>
+    </div>
+
+    <div class="form-group">
+      <input type="password" name="password" id="password" class="form-control input-lg" placeholder="密码" required>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="nickname" id="nickname" class="form-control input-lg" placeholder="昵称" required>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="注册新用户" class="btn btn-primary btn-lg">
+    </div>
+  </form>
+
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+
+  <script>
+    //点击提交按钮，提交注册信息
+    $("#form").on("submit", function (e) {
+
+      //获取数据
+      let username = $("#username").val()
+      let password = $("#password").val()
+      let nickname = $("#nickname").val()
+
+      console.log(username);
+
+      //发送ajax请求
+      //此时发送的是post请求
+      $.ajax({
+        url: "/register",
+        type: "post",
+        data: {
+          username,
+          password,
+          nickname,
+          isdel: 0,
+        },
+        dataType: "json",
+        beforeSend: () => {
+          if (username.trim() == "" || password.trim() == "" || nickname.trim() == "") {
+            alert("请正确输入")
+            return false
+          }
+
+        },
+        success: (res) => {
+          console.log(res);
+          if (res.status == 200) {
+            setTimeout(() => {
+              location.href = "./login"
+            }, 1000)
+          }
+
+        }
+      })
+      //阻止submit按钮自动提交功能
+      e.preventDefault()
+
+    })
+  </script>
+
+</body>
+
+</html>
