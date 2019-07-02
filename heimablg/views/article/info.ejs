@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/node_modules/mditor/dist/css/mditor.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/node_modules/mditor/dist/js/mditor.min.js"></script>
+</head>
+
+<body>
+    <%- include("../public/header.ejs")  %>
+
+    <div class="container">
+
+
+        <h1 class="list-group text-center">
+            <%=data[0].title%>
+
+            <!-- 只有登陆并且登陆人id==发表文章的人的id才显示编辑按钮 -->
+            <% if(isLogin&&user.id==data[0].authorId){  %>
+            <!-- 根据文章id跳转对应编辑界面 -->
+            <a href="/article/edit/<%=data[0].id%>" class="btn btn-info pull-right">编辑</a>
+            <%}%>
+        </h1>
+        <hr />
+        <div class="list-group">
+
+            <!-- <%- %> 可以输出html文本 -->
+            <%-data[0].content%>
+    </div>
+    </div>
+
+    <%- include("../public/footer.ejs")  %>
+</body>
+
+
+</html>

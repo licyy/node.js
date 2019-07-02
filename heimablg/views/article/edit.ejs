@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/node_modules/mditor/dist/css/mditor.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/node_modules/mditor/dist/js/mditor.min.js"></script>
+</head>
+
+<body>
+    <%- include("../public/header.ejs")  %>
+
+    <div class="container">
+        <h1>文章界面</h1>
+
+        <form action="" method="POST" role="form" id="form">
+            <!-- session是有事件限制的，在页面加载的时候就将用户信息记录下来 -->
+            <input class="hidden" name="articleId" value="<%=articleId%>">
+            <legend>修改文章</legend>
+
+            <div class="form-group">
+                <label for="title">文章标题</label>
+                <input name="title" type="text" class="form-control" id="title" placeholder="Input field" required
+                    value="<%= data[0].title%>">
+            </div>
+            <div class="form-group">
+                <label for="content">文章内容</label>
+                <textarea name="content" class="form-control" id="content">
+                        <%= data[0].content%>
+            </textarea>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+
+    <%- include("../public/footer.ejs")  %>
+</body>
+<script>
+    //初始化富文本编辑器
+    var mditor = Mditor.fromTextarea($("#content")[0])
+
+
+    //点击提交提交表单数据
+    $("#form").on("submit", function () {
+        event.preventDefault()
+        //post发送表单数据
+        // let data = $("#form").serialize()
+        let title=$("#title").val()
+        let content=$("#content").val()
+        // 获取文章id
+        let id = $("input[class='hidden']").val()
+        // console.log(articleId);
+// console.log(title,content);
+
+        $.ajax({
+            url: `/article/edit/${id}`,
+            type: "post",
+            data:{
+                title,
+                content,
+                id
+
+            },
+            success(res) {
+                console.log(res);
+                if (res.status != "200") return console.log(res.msg);
+
+                // //获取文章id，将文章id发送给服务器，获取文章详情
+                let url = `/article/info/${res.articleId}`
+                setTimeout(function () {
+                    location.href = url
+                })
+
+
+
+            }
+
+
+        })
+    })
+</script>
+
+</html>

@@ -9,19 +9,65 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/moment/moment.js"></script>
+    <script src="../node_modules/art-template/lib/template-web.js"></script>
 
+    <script type="text/template" id="ArticleList">
+        {{each data}}
+        <a href="/article/info/{{$value.id}}" class="list-group-item">{{$value.title}}<span class="badge" style="background-color:#eb9316">{{$value.nickname}}</span><span class="badge bg-primary"style="background-color:#5bc0de;">{{$value.ctime}}</span></a>
+        {{/each}}
+    </script>
+    <style>
+        h1 {
+            text-indent: 20px;
+            margin: 30px 0;
+        }
+    </style>
 </head>
 
 <body>
 
     <%- include("./public/header.ejs")  %>
 
+    <h1>文章列表</h1>
+
+    <div class="list-group">
+
+    </div>
 
 
 
 
     <%- include("./public/footer.ejs")  %>
 
+
+    <script>
+        //页面加载的时候就执行
+        $(function () {
+            // const oo = "2014-09-08T08:02:17-05:00";
+            // console.log(moment().format('YYYY-MM-DD'));
+            $.ajax({
+                url: "/list",
+                type: "get",
+                dataType: "json",
+                success(res) {
+                    //使用moment.js转换时间格式
+                    res.data.forEach(item => {
+                        item.ctime=moment(item.ctime).format("YYYY-MM-DD hh:mm:ss")
+                        // console.log(item);
+                    });
+                    // moment().format("YYYY-MM-DD hh:mm:ss")
+                    let html = template("ArticleList", res)
+                    $(".list-group").html(html)
+
+
+
+                }
+
+
+            })
+        })
+    </script>
 </body>
 
 </html>

@@ -12,5 +12,8 @@ const ctrl = require("../controller/index.js")
 //事件处理函数在controller》index.js中
 routerIndex.get("/", ctrl.showIndex)
 
+//这里是获取文章列表的路由
+routerIndex.get("/list",ctrl.getList)
+
 //暴露routerIndex对象
 module.exports = routerIndex

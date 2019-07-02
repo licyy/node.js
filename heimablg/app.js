@@ -1,5 +1,5 @@
 //导入express模块
-const express = require("express")
+const express=require("express")
 //创建app服务器对象
 const app = express()
 const fs = require("fs")
@@ -14,6 +14,9 @@ app.use(session({
     saveUninitialized: false,
 }))
 
+//导入monent.js模块
+const moment = require("moment")
+
 //导入获取数据中间件
 const bodyParser = require("body-parser")
 //挂载中间件
@@ -21,8 +24,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-//导入monent.js模块
-const moment = require("moment")
+
 
 //设置ejs模板
 app.set("view engine", "ejs")
